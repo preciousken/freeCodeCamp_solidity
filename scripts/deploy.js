@@ -10,12 +10,12 @@ async function main() {
   console.log("Please wait... Deploying...");
 
   // Deploy the contract
-  const simpleStorage = await SimpleStorageFactory.deploy();//
+  const simpleStorage = await SimpleStorageFactory.deploy();
 
   // Wait for the contract to be deployed
-  // await simpleStorage.deployed();
+  const address = await simpleStorage.getAddress()
 
-  console.log(`Deployed contract to: ${simpleStorage.address}`);
+  console.log(`Deployed contract to: ${address}`);
 }
 
 // main
