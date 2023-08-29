@@ -14,7 +14,7 @@ async function main() {
 
   if(network.config.chainId == 11155111 && process.env.ETHERSCAN_API_KEY){
     await simpleStorage.deploymentTransaction().wait(6)
-    await verify(simpleStorage.getAddress(),[])
+    await verify( await simpleStorage.getAddress(),[])
   }
 
   // Wait for the contract to be deployed
