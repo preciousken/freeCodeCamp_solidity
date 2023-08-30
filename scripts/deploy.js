@@ -25,11 +25,11 @@ async function main() {
   console.log(currentValue);
 
  // Updating the current value
-//  const transactionResponse = await simpleStorage.store(7);
+ const transactionResponse = await simpleStorage.store(7);
 
 // //  retrieving again
-// const updated = await simpleStorage.retrieve();
-// console.log(`updated value is: ${updated}`)
+const updated = await simpleStorage.retrieve();
+console.log(`updated value is: ${updated}`)
 }
 
 // verifying your contract
