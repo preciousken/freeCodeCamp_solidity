@@ -16,6 +16,7 @@
     "solidity-coverage": "^0.8.4"
   },
   "dependencies": {
+    "@chainlink/contracts": "^0.6.1",
     "@nomicfoundation/hardhat-ethers": "^3.0.2"
   }
 }
