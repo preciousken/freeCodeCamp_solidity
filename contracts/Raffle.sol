@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
-pragma solidity 0.8.8;
+pragma solidity ^0.8.8;
 
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
-import "@chainlink/contracts/src/v0.7/interfaces/KeeperCompatibleInterface.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/KeeperCompatibleInterface.sol";
 
 error Raffle_NotEnoughETHEntered();
 error Raffle_TransferFailed();
@@ -89,7 +89,7 @@ abstract contract Raffle is VRFConsumerBaseV2,KeeperCompatibleInterface{
      * 4. the lottery should be in open state
      */
 
-    function checkUpKeep( bytes calldata /*checkData*/) public override returns (bool upKeepNeed, bytes memory) {
+    function checkUpKeep( bytes memory /*checkData*/) public view returns (bool upKeepNeed, bytes memory) {
         bool isOpen = (RaffleState.OPEN == s_raffleState);
         bool timePassed = ((block.timestamp - s_lastTimeStamp) > i_interval);
         bool hasPlayers = (s_players.length > 0);
@@ -106,7 +106,7 @@ abstract contract Raffle is VRFConsumerBaseV2,KeeperCompatibleInterface{
         (bool upKeepNeeded, ) = checkUpKeep("");
 
         if(!upKeepNeeded){
-            revert Raffle_UpKeepNotNeeded( address(this).balance, s_player.length, uint256(s_raffleState));
+            revert Raffle_UpKeepNotNeeded( address(this).balance, s_players.length, uint256(s_raffleState));
         }
 
         s_raffleState = RaffleState.CALCULATING;
@@ -149,9 +149,9 @@ abstract contract Raffle is VRFConsumerBaseV2,KeeperCompatibleInterface{
         return s_players[index]; 
     }
 
-    function getRecentWinner() public view  returns (address) {
-        return s_recenteWinner;
-    }
+    // function getRecentWinner() public view  returns (address) {
+    //     return s_recenteWinner;
+    // }
     
     function getRaffleState() public view  returns (RaffleState) {
         return s_raffleState;
