@@ -20,7 +20,7 @@ error Raffle_UpKeepNotNeeded(uint256 currentBalance, uint256 numPlayers, uint256
 
 abstract contract Raffle is VRFConsumerBaseV2,KeeperCompatibleInterface{
 
-    // Types declaration
+    // Types declaration.
     enum RaffleState {
         OPEN,
         CALCULATING
